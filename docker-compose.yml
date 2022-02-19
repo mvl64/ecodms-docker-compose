@@ -1,16 +1,16 @@
 version: "3"
 services:
-  ecodms-ecodms21:
+  ecodms-ecodms21-12:
     command:
       - /opt/ecodms/ecodmsserver/run.sh
-    container_name: ecodms-ecodms21
+    container_name: ecodms-ecodms21-12
     environment:
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       - LANG=eng
       - LANGUAGE=eng
       - LC_ALL=de_DE.UTF-8
     hostname: ecodms-ecodms21
-    image: ecodms/ecodms:latest
+    image: ecodms/ecodms:21.12-01
     ipc: private
     logging:
       driver: db
