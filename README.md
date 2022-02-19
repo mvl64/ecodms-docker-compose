@@ -1,23 +1,26 @@
 # ecodms-docker-compose
-Running Ecodms in a docker environment, using docker compose
+Running Ecodms in a docker environment, using docker compose, on a Synology NAS.
 
-This docker-compose file creates a container for ecodms 18.09 with persistent data store.
+This docker-compose file creates a container for ecodms 21.12 with persistent data store.
+In my setup, data for each new version is stored in a separate data store - so I can easily test the new version and revert back to the old container if needed.
+
 You can either take the storage layout, or choose your own folders by editing the docker-compose file.
 
 ## Data storage
-Ecodms document and database data will be stored in a subfolder called ```data/ecodmsData``` relative to path where the docker-compose file is stored.
-The same is true for the scaninput folder, which will be stored in a subfolder called data/scaninput
+Ecodms document and database data will be stored in a subfolder called ```/docker/ecoDMS21.12```
 
-For example, if the docker-compose file is places in ```/opt/ecodms```, then the data folder will be ```/opt/ecodms/data/ecodmsData``` and the scan folder will be ```/opt/ecodms/data/scaninput```
+Next to the container data - I have one generic folder related to ecoDMS.
+This folder contains a subfolder for the scaninput: ```/ecoDMS/ScanInput```.
+It also contains subfolders for backups and restores (see next section)
 
 ## Backup and Restore
-Ecodms has the capability to easily create backups and to be easily restored. For this there exist two folders, which in this case are placed under ```/data/ecodms-backup``` and ```/data/ecodms-restore```
+Ecodms has the capability to easily create backups which can easily be restored. For this there exist two folders, which in this case are placed under ```/ecoDMS/Backup``` and ```/ecoDMS/Restore```
 
 If you want to backup your ecodms container data, just create an empty file called "create" in the backup folder, shortly after the backup will be created as a zip file and then the "create" file will be removed
 
-For example: ```touch /data/ecodms-backup/create```
+For example: ```touch /ecoDMS/Backup/create```
 
-If you want to restore a backup then place one of the *.zip files that you have created in the folder ```/data/ecodms-restore``` and remname it to ```restore.zip```.
+If you want to restore a backup then place one of the *.zip files that you have created in the folder ```/ecoDMS/Restore``` and rename it to ```restore.zip```.
 Then restart the container with ```docker-compose down && docker-compose up -d``` and the restore will be performed
 
 **BUT BE AWARE,  this will overwrite *ALL DATA* in the ecodms container with the data from ```restore.zip```**
