@@ -26,7 +26,7 @@ services:
     user: root
     volumes:
       - /volume1/Public/Scan/ScanInput:/srv/scaninput:rw
-      - /volume1/docker/ecoDMS21.:/srv/data:rw
+      - /volume1/docker/ecoDMS21.12:/srv/data:rw
       - /volume1/ecoDMS/Restore:/srv/restore:rw
       - /volume1/ecoDMS/Backup:/srv/backup:rw
 networks: {}
